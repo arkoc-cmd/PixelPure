@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelPure — Premium DSLR RAW Image Converter</title>
+  <meta name="description" content="Convert DSLR and mirrorless camera RAW files (CR2, CR3, NEF, ARW, RAF, DNG) into high-quality JPEGs, PNGs, and WEBP. Professional batch processing in-browser.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Google Material Symbols (Outlined) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Decorative Grid & Atmospheric Glow -->
+  <div class="bg-grid"></div>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container container">
+      <!-- Left: Logo -->
+      <a href="index.html" class="brand-logo">
+        <span class="logo-icon">
+          <span class="material-symbols-outlined">photo_camera</span>
+        </span>
+        <span class="logo-text">Pixel<span class="logo-accent">Pure</span></span>
+      </a>
+
+      <!-- Center Nav -->
+      <nav class="main-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="#features" class="nav-link">Tools</a></li>
+          <li><a href="#formats" class="nav-link">API</a></li>
+          <li><a href="#faq" class="nav-link">Pricing</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="header-actions">
+        <a href="#" class="btn-text">Sign In</a>
+        <a href="#" class="btn-nav-signup">Sign Up</a>
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle visual theme">
+          <span class="material-symbols-outlined dark-icon">dark_mode</span>
+          <span class="material-symbols-outlined light-icon">light_mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container container">
+      <!-- Centered Content & Upload Area -->
+      <div class="hero-content">
+        <div class="badge-trust">
+          <span class="material-symbols-outlined">lock</span>
+          <span>100% Secure • Local Browser Processing</span>
+        </div>
+        <h1 class="hero-title text-center">Drag & Drop Files to Upload</h1>
+        <p class="hero-subtitle text-center">Supports batch imports up to 100 files at once. Convert DSLR and mirrorless RAW photos instantly with professional-grade detail retention.</p>
+        
+        <!-- Upload Box Area (Full width) -->
+        <div id="dropzone" class="upload-dropzone full-width-dropzone">
+          <div class="dropzone-inner">
+            <span class="material-symbols-outlined upload-icon-glow">cloud_upload</span>
+            <p class="dropzone-text">Drag & drop your RAW files here or</p>
+            <input type="file" id="file-input" class="hidden-file-input" multiple accept=".raw,.cr2,.cr3,.arw,.raf,.nef,.dng,.orf,.rw2,.jpg,.jpeg,.png,.webp,.svg,.heic">
+            
+            <!-- Neon Glowing CTA wrapper -->
+            <div class="neon-btn-wrapper">
+              <button type="button" id="browse-trigger" class="btn-primary">
+                <span class="material-symbols-outlined">photo_library</span>
+                <span>Upload Files</span>
+              </button>
+            </div>
+            
+            <p class="file-limits">Supported formats: RAW, CR2, CR3, ARW, NEF, DNG, RAF, ORF, RW2, HEIC & more</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Background Animated conversion visual (seamlessly behind content) -->
+      <div class="hero-visual">
+        <div class="conversion-visual-container bg-glow-visual">
+          <div class="pulse-ring ring-1"></div>
+          <div class="pulse-ring ring-2"></div>
+          <div class="pulse-ring ring-3"></div>
+
+          <!-- Format Card 1 (Input) - Floating Left -->
+          <div class="visual-card card-input">
+            <div class="card-format-badge">CR3</div>
+            <div class="card-icon-container">
+              <span class="material-symbols-outlined">image</span>
+            </div>
+            <div class="card-meta">
+              <span class="card-filename">IMG_3842.CR3</span>
+              <span class="card-filesize">42.8 MB</span>
+            </div>
+          </div>
+
+          <!-- Stretched Connecting Line behind dropzone -->
+          <div class="conversion-flow-line">
+            <div class="flow-pulse"></div>
+          </div>
+
+          <!-- Format Card 2 (Output) - Floating Right -->
+          <div class="visual-card card-output">
+            <div class="card-format-badge badge-success">JPEG</div>
+            <div class="card-icon-container container-success">
+              <span class="material-symbols-outlined text-success">check_circle</span>
+            </div>
+            <div class="card-meta">
+              <span class="card-filename">IMG_3842.JPG</span>
+              <span class="card-filesize">8.4 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Section: Why Photographers Choose PixelPure -->
+  <section id="features" class="features-section scroll-reveal">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="sub-heading">Uncompromised Power</span>
+        <h2 class="section-title-alt">Why Photographers Choose PixelPure</h2>
+        <p class="section-description">A high-performance pipeline engineered for creative workflows demanding speed, color accuracy, and security.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Card 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <span class="material-symbols-outlined">bolt</span>
+          </div>
+          <h3 class="feature-card-title">Lightning Fast Processing</h3>
+          <p class="feature-card-text">Harnesses multi-threaded WebAssembly to decode RAW formats instantly, cutting waiting times by up to 80% compared to traditional cloud tools.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <span class="material-symbols-outlined">high_quality</span>
+          </div>
+          <h3 class="feature-card-title">Professional Quality Output</h3>
+          <p class="feature-card-text">Advanced demosaicing algorithms preserve fine highlights, deep shadow structures, and razor-sharp clarity without adding artifacts.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <span class="material-symbols-outlined">photo_library</span>
+          </div>
+          <h3 class="feature-card-title">Batch Conversion up to 100 Files</h3>
+          <p class="feature-card-text">Upload complete folders or multiple selections. Run concurrent conversions with customized, uniform format preferences easily.</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <span class="material-symbols-outlined">shield</span>
+          </div>
+          <h3 class="feature-card-title">Privacy First Processing</h3>
+          <p class="feature-card-text">Your photos never leave your device. All operations execute strictly in your local sandbox, keeping your catalog private and secure.</p>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <span class="material-symbols-outlined">info</span>
+          </div>
+          <h3 class="feature-card-title">Preserve Camera Metadata</h3>
+          <p class="feature-card-text">Retain complete EXIF, IPTC, and XMP camera details including ISO, aperture, lens profile, focal length, and copyright info.</p>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <span class="material-symbols-outlined">palette</span>
+          </div>
+          <h3 class="feature-card-title">Professional Color Profiles</h3>
+          <p class="feature-card-text">Choose between standard sRGB for digital sharing and wider gamut Adobe RGB to ensure complete printing color fidelity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Supported Camera Formats Section -->
+  <section id="formats" class="formats-section scroll-reveal">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="sub-heading">Broad Compatibility</span>
+        <h2 class="section-title-alt">Supported Camera Formats</h2>
+        <p class="section-description">Compatible with RAW formats from all major camera manufacturers.</p>
+      </div>
+
+      <div class="brands-grid">
+        <!-- Canon -->
+        <div class="brand-card">
+          <div class="brand-logo-svg">
+            <svg viewBox="0 0 120 40" width="100" height="35" class="brand-svg">
+              <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="22" letter-spacing="2">Canon</text>
+            </svg>
+          </div>
+          <div class="brand-formats">
+            <span class="format-tag">CR2</span>
+            <span class="format-tag">CR3</span>
+          </div>
+        </div>
+
+        <!-- Nikon -->
+        <div class="brand-card">
+          <div class="brand-logo-svg">
+            <svg viewBox="0 0 120 40" width="100" height="35" class="brand-svg">
+              <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="22" letter-spacing="2">Nikon</text>
+            </svg>
+          </div>
+          <div class="brand-formats">
+            <span class="format-tag">NEF</span>
+          </div>
+        </div>
+
+        <!-- Sony -->
+        <div class="brand-card">
+          <div class="brand-logo-svg">
+            <svg viewBox="0 0 120 40" width="100" height="35" class="brand-svg">
+              <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="20" letter-spacing="4">SONY</text>
+            </svg>
+          </div>
+          <div class="brand-formats">
+            <span class="format-tag">ARW</span>
+          </div>
+        </div>
+
+        <!-- Fujifilm -->
+        <div class="brand-card">
+          <div class="brand-logo-svg">
+            <svg viewBox="0 0 120 40" width="100" height="35" class="brand-svg">
+              <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="18" letter-spacing="1">FUJIFILM</text>
+            </svg>
+          </div>
+          <div class="brand-formats">
+            <span class="format-tag">RAF</span>
+          </div>
+        </div>
+
+        <!-- Olympus -->
+        <div class="brand-card">
+          <div class="brand-logo-svg">
+            <svg viewBox="0 0 120 40" width="100" height="35" class="brand-svg">
+              <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="18" letter-spacing="2">OLYMPUS</text>
+            </svg>
+          </div>
+          <div class="brand-formats">
+            <span class="format-tag">ORF</span>
+          </div>
+        </div>
+
+        <!-- Panasonic -->
+        <div class="brand-card">
+          <div class="brand-logo-svg">
+            <svg viewBox="0 0 120 40" width="100" height="35" class="brand-svg">
+              <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="17" letter-spacing="1">Panasonic</text>
+            </svg>
+          </div>
+          <div class="brand-formats">
+            <span class="format-tag">RW2</span>
+          </div>
+        </div>
+
+        <!-- Leica -->
+        <div class="brand-card">
+          <div class="brand-logo-svg">
+            <svg viewBox="0 0 120 40" width="100" height="35" class="brand-svg">
+              <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="20" letter-spacing="3">LEICA</text>
+            </svg>
+          </div>
+          <div class="brand-formats">
+            <span class="format-tag">DNG</span>
+          </div>
+        </div>
+
+        <!-- Pentax & Universal DNG -->
+        <div class="brand-card">
+          <div class="brand-logo-svg">
+            <svg viewBox="0 0 120 40" width="100" height="35" class="brand-svg">
+              <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="18" letter-spacing="2">PENTAX</text>
+            </svg>
+          </div>
+          <div class="brand-formats">
+            <span class="format-tag">PEF</span>
+            <span class="format-tag">DNG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section scroll-reveal">
+    <div class="container max-width-md">
+      <div class="section-header text-center">
+        <span class="sub-heading">Answers</span>
+        <h2 class="section-title-alt">Frequently Asked Questions</h2>
+        <p class="section-description">Everything you need to know about RAW photo conversions on PixelPure.</p>
+      </div>
+
+      <div class="faq-accordion" role="presentation">
+        <!-- Q1 -->
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-1">
+            <span class="faq-question">What is a RAW file?</span>
+            <span class="material-symbols-outlined faq-icon">expand_more</span>
+          </button>
+          <div id="faq-ans-1" class="faq-content" role="region" aria-hidden="true">
+            <div class="faq-content-inner">
+              <p>A RAW file contains minimally processed data from the image sensor of a digital camera. RAW files are uncompressed and capture the maximum amount of detail, dynamic range, and color information possible, which gives photographers total control during editing but results in large file sizes that need conversion to be easily shared.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-2">
+            <span class="faq-question">Which camera brands are supported?</span>
+            <span class="material-symbols-outlined faq-icon">expand_more</span>
+          </button>
+          <div id="faq-ans-2" class="faq-content" role="region" aria-hidden="true">
+            <div class="faq-content-inner">
+              <p>PixelPure supports all major camera brands and formats including Canon (CR2, CR3), Nikon (NEF), Sony (ARW), Fujifilm (RAF), Olympus (ORF), Panasonic (RW2), Pentax (PEF), and the universal Adobe Digital Negative (DNG) standard.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-3">
+            <span class="faq-question">Can I upload multiple files?</span>
+            <span class="material-symbols-outlined faq-icon">expand_more</span>
+          </button>
+          <div id="faq-ans-3" class="faq-content" role="region" aria-hidden="true">
+            <div class="faq-content-inner">
+              <p>Yes, batch conversion is fully supported. You can select and upload up to 100 RAW files at once. The dashboard allows you to configure conversion settings uniformly across the entire batch or individually.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-4">
+            <span class="faq-question">Is metadata preserved?</span>
+            <span class="material-symbols-outlined faq-icon">expand_more</span>
+          </button>
+          <div id="faq-ans-4" class="faq-content" role="region" aria-hidden="true">
+            <div class="faq-content-inner">
+              <p>Yes. By default, PixelPure retains all core EXIF, IPTC, and XMP camera details including ISO speed, exposure time, aperture details, lens profiles, capture date, and copyright credentials. You can choose to strip this metadata in the settings sidebar if you prefer privacy.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-5">
+            <span class="faq-question">Which output formats are supported?</span>
+            <span class="material-symbols-outlined faq-icon">expand_more</span>
+          </button>
+          <div id="faq-ans-5" class="faq-content" role="region" aria-hidden="true">
+            <div class="faq-content-inner">
+              <p>You can convert your RAW images into standard JPEG, lossless PNG, next-gen high-efficiency WEBP, or high-fidelity professional TIFF output files. You can choose your output format in the dashboard sidebar settings.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-6">
+            <span class="faq-question">Is PixelPure secure?</span>
+            <span class="material-symbols-outlined faq-icon">expand_more</span>
+          </button>
+          <div id="faq-ans-6" class="faq-content" role="region" aria-hidden="true">
+            <div class="faq-content-inner">
+              <p>PixelPure features client-side browser-based execution. Files are processed entirely locally on your processor via WebAssembly. Your photos never touch our servers, meaning there is zero threat of exposure or unpermitted data collection.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-7">
+            <span class="faq-question">Can I download everything as ZIP?</span>
+            <span class="material-symbols-outlined faq-icon">expand_more</span>
+          </button>
+          <div id="faq-ans-7" class="faq-content" role="region" aria-hidden="true">
+            <div class="faq-content-inner">
+              <p>Absolutely. Once the conversion progress finishes, you can download individual files directly or compile the entire batch of converted images into a compressed ZIP file with a single click.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container container">
+      <!-- Info Column -->
+      <div class="footer-info">
+        <a href="index.html" class="brand-logo">
+          <span class="logo-icon">
+            <span class="material-symbols-outlined">photo_camera</span>
+          </span>
+          <span class="logo-text">Pixel<span class="logo-accent">Pure</span></span>
+        </a>
+        <p class="footer-description">Professional-grade RAW photo conversion built natively for browser sandbox security. Uncompromised image resolution, color accuracy, and performance.</p>
+      </div>
+
+      <!-- Links Grid -->
+      <div class="footer-links-grid">
+        <div class="footer-column">
+          <h4 class="footer-heading">Product</h4>
+          <ul class="footer-links">
+            <li><a href="#">Converter</a></li>
+            <li><a href="#">API</a></li>
+            <li><a href="#">Pricing</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-heading">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Help Center</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom footer -->
+    <div class="footer-bottom container">
+      <div class="footer-copyright">
+        &copy; 2026 PixelPure. All rights reserved. Professional tools for creative studios.
+      </div>
+      <div class="footer-socials">
+        <a href="#" class="social-link" aria-label="Follow us on X">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="#" class="social-link" aria-label="Follow us on Instagram">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+        </a>
+        <a href="#" class="social-link" aria-label="Follow us on LinkedIn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactivity Script -->
+  <script src="script.js"></script>
+</body>
+</html>
